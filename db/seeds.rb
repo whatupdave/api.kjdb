@@ -1,0 +1,1 @@
+Songbook.create! slug: 'dj-purple', name: 'DJ Purple'
