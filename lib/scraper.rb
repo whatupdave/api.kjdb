@@ -25,12 +25,16 @@ module Scraper
   end
 
   class Scrape
-    attr_reader :name
+    attr_reader :slug
     attr_reader :block
 
-    def initialize(name, &block)
-      @name = name
+    def initialize(slug, &block)
+      @slug = slug
       @block = block
+    end
+
+    def scrape!
+      Tracks.new(&@block)
     end
   end
 
@@ -39,20 +43,13 @@ module Scraper
     @scrapes << Scrape.new(name, &blk)
   end
 
-  def self.scrape_all
-    @scrapes.each do |scrape|
-      songbook = Songbook.find_by!(slug: scrape.name)
+  def self.all
+    @scrapes
+  end
 
-      puts "scraping #{songbook.name}"
-      tracks = Tracks.new(&scrape.block)
-
-      tracks.each do |track|
-        entry = songbook.entries.find_by(artist: track.artist, title: track.title)
-        if entry.nil?
-          puts "New track #{track.artist} – #{track.title}"
-          songbook.entries.create!(artist: track.artist, title: track.title)
-        end
-      end
-    end
+  def self.find(slug)
+    @scrapes.find{|s| s.slug == slug }
   end
 end
+
+Dir[File.dirname(__FILE__) + '/scrapers/*.rb'].each {|file| require file }

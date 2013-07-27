@@ -1,8 +1,10 @@
-require 'scrapers/dj-purple'
+require 'scraper'
 
 namespace :scrape do
   task :all => :environment do
-    Scraper.scrape_all
+    Scraper.all.each do |scraper|
+      ScrapeBook.perform_async(scraper.slug)
+    end
   end
 
   task :update_tracks => :environment do
