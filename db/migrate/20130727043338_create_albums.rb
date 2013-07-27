@@ -7,7 +7,7 @@ class CreateAlbums < ActiveRecord::Migration
       t.datetime :release_date
       t.timestamps
 
-      t.index :slug, unique: true
+      t.index [:artist_id, :slug], unique: true
     end
   end
 end

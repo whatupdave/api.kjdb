@@ -6,7 +6,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :name,       null: false
       t.timestamps
       
-      t.index :slug, unique: true
+      t.index [:album_id, :slug], unique: true
     end
   end
 end
