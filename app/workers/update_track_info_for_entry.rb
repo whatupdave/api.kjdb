@@ -1,15 +1,15 @@
 require 'sluggify'
 
-class GetTrackInfoForEntry
+class UpdateTrackInfoForEntry
   include Sidekiq::Worker
 
   def perform(songbook_entry_id)
     entry = SongbookEntry.find(songbook_entry_id)
     if rdio_track = Rdio::Track.search("#{entry.artist} #{entry.title}").first
-      artist = rdio_track.artist.name
-      album = rdio_track.album.name
+      artist = rdio_track.artist.name.to_s
+      album = rdio_track.album.name.to_s
       release_date = rdio_track.album.release_date
-      track_name = rdio_track.name
+      track_name = rdio_track.name.to_s
 
       puts "Rdio: #{artist}(#{album} – #{release_date}) – #{track_name}"
 
