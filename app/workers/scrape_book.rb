@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'scraper'
 
 class ScrapeBook
@@ -8,12 +10,11 @@ class ScrapeBook
     songbook = Songbook.find_by!(slug: book_slug)
 
     puts "scraping #{songbook.name}"
-    tracks = scraper.scrape!
 
-    tracks.each do |track|
+    scraper.scrape do |track|
       entry = songbook.entries.find_by(artist: track.artist, title: track.title)
       if entry.nil?
-        puts "New track #{track.artist} – #{track.title}"
+        puts "New track #{track.artist} - #{track.title}"
         songbook.entries.create!(artist: track.artist, title: track.title)
       end
     end

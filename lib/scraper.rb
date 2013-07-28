@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'nokogiri'
 require 'open-uri'
 require 'json'
@@ -7,16 +9,16 @@ module Scraper
   class Track < Struct.new(:artist, :title)
   end
 
-  class Tracks
+  class CaptureTracks
     include Enumerable
 
-    def initialize(&blk)
-      @tracks = []
-      instance_eval(&blk)
+    def initialize(capture_block, &emit_block)
+      @emit_block = emit_block
+      instance_eval(&capture_block)
     end
 
     def track(options)
-      @tracks << Track.new(options[:artist].strip, options[:title].strip)
+      @emit_block.call Track.new(options[:artist].strip, options[:title].strip)
     end
 
     def each(&blk)
@@ -33,8 +35,8 @@ module Scraper
       @block = block
     end
 
-    def scrape!
-      Tracks.new(&@block)
+    def scrape(&blk)
+      CaptureTracks.new(@block, &blk)
     end
   end
 
