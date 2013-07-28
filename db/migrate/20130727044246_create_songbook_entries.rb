@@ -8,7 +8,7 @@ class CreateSongbookEntries < ActiveRecord::Migration
 
       t.references :track
 
-      t.index [:artist, :title], unique: true
+      t.index [:songbook_id, :artist, :title], unique: true
     end
   end
 end
