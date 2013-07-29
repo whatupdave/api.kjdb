@@ -1,21 +1,14 @@
-.navbar
-  %a.navbar-brand{ href: root_path } KJDB
-  %ul.nav.navbar-nav
-    %li.active
-      %a{ href: '/' } What's New
-    %li
-      %a{ href: '/' } Songbooks
+.container
+  .songbooks
+    %ul
+      - @songbooks.each do |songbook|
+        %li
+          .name= songbook[:name]
+          .info #{pluralize songbook[:new_tracks].size, 'new track', 'new tracks'}
 
-.songbooks
-  %ul
-    - @songbooks.each do |songbook|
-      %li
-        .name= songbook[:name]
-        .info #{pluralize songbook[:new_tracks].size, 'new track', 'new tracks'}
-
-        .tracks
-          %ul
-            - songbook[:new_tracks].each do |track|
-              %li #{track.artist} – #{track.title}
+          .tracks
+            %ul
+              - songbook[:new_tracks].each do |track|
+                %li #{track.artist} – #{track.title}
 
 

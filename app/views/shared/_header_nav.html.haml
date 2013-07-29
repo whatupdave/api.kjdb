@@ -1,0 +1,8 @@
+.container
+  .navbar
+    %a.brand{ href: root_path } KJDB
+    %ul.nav.navbar-nav
+      %li{ class: ('active' if @header_section == :new) }
+        %a{ href: root_path } What's New
+      %li{ class: ('active' if @header_section == :songbooks) }
+        %a{ href: songbooks_path } Songbooks

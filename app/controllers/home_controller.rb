@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @header_section = :new
+
     @songbooks = []
     Songbook.find_each do |sb|
       @songbooks << {

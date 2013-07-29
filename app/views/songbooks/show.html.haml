@@ -1,0 +1,15 @@
+.container
+  .side-nav
+    %ul.nav.songbooks
+      - @songbooks.each do |songbook|
+        %li{ class: ('active' if params[:id] == songbook.slug) }
+          %a{ href: songbook_path(songbook) }= songbook.name
+
+  .content
+    %ul.tracks
+      - @entries.each do |entry|
+        %li
+          - if track = entry.track
+            #{entry.track.album.artist.name} – #{entry.track.name}
+          - else
+            #{entry.artist} – #{entry.title}

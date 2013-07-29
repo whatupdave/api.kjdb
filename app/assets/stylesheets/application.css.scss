@@ -1,1 +1,27 @@
-//  = equire bootstrap
+//= require bootstrap
+
+.header-nav {
+  background-color: #5E477D;
+}
+
+.header-nav .navbar-brand {
+  color: #fff;
+}
+.header-nav .navbar-nav > li > a {
+  color: #cdbfe3;
+}
+.header-nav .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.header-nav .navbar-nav > .active > a,
+.header-nav .navbar-nav > .active > a:hover {
+  color: #fff;
+  background-color: #463265;
+}
+.header-nav .navbar-toggle {
+  border-color: #563d7c;
+}
+.header-nav .navbar-toggle:hover {
+  background-color: #463265;
+  border-color: #463265;
+}

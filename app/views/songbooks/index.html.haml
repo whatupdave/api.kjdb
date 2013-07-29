@@ -1,0 +1,5 @@
+.container
+  %ul.nav.songbooks
+    - @songbooks.each do |songbook|
+      %li
+        %a{ href: songbook_path(songbook) }= songbook.name
