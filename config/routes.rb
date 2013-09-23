@@ -3,6 +3,8 @@ ApiKjdbCom::Application.routes.draw do
 
   resources :songbooks, only: [:index, :show]
 
+  get '/artist/:artist_id/album/:album_id/track/:id' => 'tracks#show', :as => :track
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 end

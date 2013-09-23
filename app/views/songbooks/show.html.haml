@@ -10,6 +10,6 @@
       - @entries.each do |entry|
         %li
           - if track = entry.track
-            #{entry.track.album.artist.name} – #{entry.track.name}
+            = link_to "#{track.album.artist.name} – #{track.name}", track_path(track.artist, track.album, track)
           - else
             #{entry.artist} – #{entry.title}

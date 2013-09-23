@@ -1,0 +1,7 @@
+.container
+  %h1 #{@artist.name}
+  %p #{@track.name}
+
+  %ul
+    - @tracks.each do |track|
+      %li= link_to "#{track.name}", track_path(track.artist, track.album, track)
