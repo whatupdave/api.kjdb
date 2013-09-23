@@ -13,6 +13,7 @@ gem 'rails', '4.0.0'
 gem 'rdio'
 gem 'sass-rails', '~> 4.0.0'
 gem 'sidekiq'
+gem 'sidekiq-throttler'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'slim', '>= 1.1.0'
 gem 'therubyracer'

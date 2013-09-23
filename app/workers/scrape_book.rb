@@ -5,6 +5,8 @@ require 'scraper'
 class ScrapeBook
   include Sidekiq::Worker
 
+  sidekiq_options :queue => :scrape
+
   def perform(book_slug)
     scraper = Scraper.find(book_slug)
     songbook = Songbook.find_by!(slug: book_slug)
